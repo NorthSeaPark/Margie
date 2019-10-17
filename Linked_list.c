@@ -2,92 +2,49 @@
 #include <stdlib.h>
 #include <string.h>
 
-typdef struct node
-{
+struct linkedlist{
 	int data;
-	struct node *next;
-}demo;
+	struct linkedlist *next;
+};
 
+typedef struct linkedlist *node; /*define the node*/
+
+node createNode(){
+	node temp;
+	temp = (node)malloc(sizeof(struct linkedlist));
+	temp->next = NULL;
+	return temp;
+}
+
+node addNode(node head, int value){
+	node temp, p;
+	temp = createNode();
+	temp->data = value;
+	if(head == NULL){
+		head = temp;
+	}else{
+		p = head;
+		while(p->next != NULL){
+			p = p->next;
+		}
+		p->next = temp;
+	}
+	return head;
+}
+
+void traverse(node head){
+	node temp = head;
+	while(temp != NULL){
+		temp = temp->next;
+		printf("%d\n",temp->data);
+	}
+}
 
 int main()
 {
-	demo *head = NULL;
-	if(head == NULL){
-		return 1;
-	}
-	head -> data = 1;
-	head -> next = malloc (sizeof(demo));
-	head -> next -> data = 3;
-	head -> next -> next = NULL;
-	/*creating a linklist with data 1 and 3*/
-}
-
-/*Method to print Java*/
-void traverse(demo *head){
-	demo *current = head;
-	printf("%d\n", current->data );
-	while(current -> next != NULL){
-		current = current -> next;
-		printf("%d\n", current->data );
-	}
-}
-
-/*insert node in a the linked list in increasing order*/
-void push(demo *head, int value){
-	demo *current = head;
-	if(current -> next == NULL){
-		if(current -> data <= value){
-			current->next = malloc(sizeof(demo));
-			current->next->data = value;
-			current->next->next = NULL;
-		}else{
-			demo *head1 = NULL;
-			head1->data = value;
-			head1->next = current;
-			current = head1;
-		}
-	}
-	while(current->next != NULL){
-		if(value <= current->data){
-			demo *head1 = NULL;
-			head1->data = value;
-			head1->next = current;
-			current = head1;
-		}else{
-			current = current->next;
-			if(current->next == NULL){
-				if(value <= current->data){
-					demo *head1 = NULL;
-					head1->data = value;
-					head1->next = current;
-					current = head1;
-					break;
-				}else{
-					current->next = malloc(sizeof(demo));
-					current->next->data = value;
-					current->next->next = NULL;
-					break;
-				}
-			}
-		}
-
-	}
-}
-
-/*Use Recursive*/
-void push1(demo *head, int value){
-	if(head->next == NULL){
-		if(current -> data <= value){
-			current->next = malloc(sizeof(demo));
-			current->next->data = value;
-			current->next->next = NULL;
-		}else{
-			demo *head1 = NULL;
-			head1->data = value;
-			head1->next = current;
-			current = head1;
-		}
-	}else{
-		push1(head->next, value);
-	}
+	node sb = createNode();
+	sb = addNode(sb, 3);
+	sb = addNode(sb, 2);
+	sb = addNode(sb, 1);
+	traverse(sb);
 }
