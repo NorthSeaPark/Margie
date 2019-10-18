@@ -1,0 +1,14 @@
+Insert node in order
+|-----|     |-----|
+|--2--|---->|--4--|
+|-----|     |-----|
+This is the basic situation
+Case 1:
+*if the next node of head is NULL or the the value of head is larger than the insert value
+Then, we adjust
+Case 2:
+*if the next node of head is not NULL and the insert value is larger than the head
+Then,
+We loop the list_nodes until we find the nodes which is larger than the insert value (or we just directly go to the end)
+
+

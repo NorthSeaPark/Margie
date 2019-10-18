@@ -34,10 +34,23 @@ node addNode(node head, int value){
 	return head;
 }
 
-/*Insert by order*/
-void pushNode(node head, int value){
+void add(node head, int value){
 	node temp = createNode(value);
-	if(head->next == NULL){
+	if(head = NULL){
+		head = temp;
+	}else{
+		node p = head;
+		while(p->next != NULL){
+			p = p->next;
+		}
+		p->next = temp;
+	}
+}
+
+/*Insert by order*/
+node pushNode(node head, int value){
+	node temp = createNode(value);
+	if(head->next == NULL || head->data>value){
 		if(value>=head->data){
 			head->next = temp;
 		}else{
@@ -45,14 +58,14 @@ void pushNode(node head, int value){
 			head = temp;
 		}
 	}else{
-		node current = head;
-		while(current->next!=NULL&&current->next->data<value){
-			current = current->next;
-		}
-		temp->next=current->next;
-		current->next = temp;
+			node current = head;
+			while(current->next!=NULL&&current->next->data<value){
+				current = current->next;
+			}
+			temp->next=current->next;
+			current->next = temp;
 	}
-
+	return head;
 }
 
 void traverse(node head){
@@ -65,7 +78,11 @@ void traverse(node head){
 
 int main()
 {
-	node sb = createNode(4);
-	pushNode(sb,3);
+	node sb = createNode(5);
+	sb = pushNode(sb,3);
+	sb = pushNode(sb,2);
+	sb = pushNode(sb,4);
+	sb = pushNode(sb,1);
+	sb = pushNode(sb,6);
 	traverse(sb);
 }
