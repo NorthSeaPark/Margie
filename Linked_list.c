@@ -76,6 +76,13 @@ void traverse(node head){
 	}
 }
 
+/*remove the first value*/
+int pop(node head);
+
+/*remove and return the specific*/
+
+
+
 int main()
 {
 	node sb = createNode(5);
