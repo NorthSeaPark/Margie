@@ -1,3 +1,15 @@
+Keep programming every day.
+Make programming as a habit.
+
+Typedef:
+typedef struct Books {
+   char title[50];
+   char author[50];
+   char subject[100];
+   int book_id;
+} Book;
+
+
 Insert node in order
 |-----|     |-----|
 |--2--|---->|--4--|

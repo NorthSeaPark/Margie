@@ -77,7 +77,13 @@ void traverse(node head){
 }
 
 /*remove the first value*/
-int pop(node head);
+int pop(node head){
+	node demo = head->next;
+	int i = head->data;
+	free(head);
+	head = demo;
+	return i;
+}
 
 /*remove and return the specific*/
 
@@ -92,4 +98,8 @@ int main()
 	sb = pushNode(sb,1);
 	sb = pushNode(sb,6);
 	traverse(sb);
+	int i = pop(sb);
+	printf("pop %d\n",i );
+	int n = pop(sb);
+	printf("pop %d\n",n );
 }
