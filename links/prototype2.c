@@ -43,11 +43,11 @@ void traverse(Node *head, ActionFunction doThis){
 
 /*Insert Function*/
 int insert(Node **p2head, void *data, ComparisonFunction goesInFrontOf){
-	if(*p2head->next==NULL||goesInFrontOf((char*)(*p2head->data),(char*)data)>0){
-		if(goesInFrontOf((char*)data,(char*)(*p2head->data))>=0){
-			*p2head->next = malloc(sizeof(Node));
-			*p2head->next->data = data;
-			*p2head->next->next = NULL;
+	if((*p2head)->next==NULL||goesInFrontOf((*p2head)->data,data)>0){
+		if(goesInFrontOf(data,(*p2head)->data)>=0){
+			(*p2head)->next = malloc(sizeof(Node));
+			(*p2head)->next->data = data;
+			(*p2head)->next->next = NULL;
 		}else{
 			Node *temp = malloc(sizeof(Node));
 			temp->data = data;
@@ -56,7 +56,7 @@ int insert(Node **p2head, void *data, ComparisonFunction goesInFrontOf){
 		}
 	}else{
 		Node *current = *p2head;
-		while(current->next!=NULL&&goesInFrontOf((char*)(current->next),(char*)data)<0){
+		while(current->next!=NULL&&goesInFrontOf(current->next,data)<0){
 			current = current->next;
 		}
 		Node *temp = malloc(sizeof(Node));
