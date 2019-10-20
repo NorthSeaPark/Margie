@@ -42,5 +42,5 @@ float result = (*myFnPtr)(2.0,5.1);
 ----------------------------------------------------------------------------------------
 %p address of the pointer or any other variable
 ----------------------------------------------------------
-
+void always means a pointer
 
