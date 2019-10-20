@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "linkedlist.h"
 #include <string.h>
+
+/*This is for the prototype 1*/
+
 /*Action function print the string*/
 void printString(void *data){
 	printf("%s\n", (char*)data);
@@ -17,6 +20,7 @@ int compareFirst(void *data1, void *data2){
 	}
 }
 
+/*A criteria function might return true when the first character of the string is upper case. These are all easily tested.*/
 int firstCapital(void *data){
 	char *a = "A";
 	char *z = "Z";
@@ -28,7 +32,7 @@ int firstCapital(void *data){
 	
 }
 
-/*A criteria function might return true when the first character of the string is upper case. These are all easily tested.*/
+
 
 int main()
 {
@@ -36,11 +40,11 @@ int main()
 	demo1("New Boy");
 
 	ComparisonFunction demo2 = &compareFirst;
-	int i = demo2("asshole", "bitch");
+	int i = demo2("Charlie", "Bob");
 	printf("%d\n", i);
 
 	
 	CriteriaFunction demo3 = &firstCapital;
-	int n = demo3("Ass");
+	int n = demo3("Charlie");
 	printf("%d\n", n);
 }

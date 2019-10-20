@@ -24,8 +24,8 @@ void push(node *head, int value){
 	if(head->next==NULL||head->data > value){
 		if(value>=head->data){
 			head->next = malloc(sizeof(node));
-			temp->next->data = value;
-			temp->next->next = NULL;
+			head->next->data = value;
+			head->next->next = NULL;
 		}else{
 			node *temp = malloc(sizeof(node));
 			temp->data = value;
