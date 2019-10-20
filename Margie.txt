@@ -43,4 +43,9 @@ float result = (*myFnPtr)(2.0,5.1);
 %p address of the pointer or any other variable
 ----------------------------------------------------------
 void always means a pointer
+-----------------------------------------------------------------------------------------
+This how we compare the first n characters of the string in c
+char str1[] = "asshole";
+char str2[] = "bitch";
+printf("%d\n", strncmp(str1, str2, 1));
 
