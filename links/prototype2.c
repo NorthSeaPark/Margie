@@ -33,36 +33,51 @@ int firstCapital(void *data){
 }
 
 /*Traverse Functions*/
-void traverse(Node *head, ActionFunction doThis){
+void traverse1(Node *head, ActionFunction doThis){
 	Node *temp = head;
 	while(temp!=NULL){
-		printf("%s\n",(char*)temp->data);
+		doThis(temp->data);
 		temp=temp->next;
 	}
 }
 
 /*Insert Function*/
-int insert(Node **p2head, void *data, ComparisonFunction goesInFrontOf){
-	if((*p2head)->next==NULL||goesInFrontOf((*p2head)->data,data)>0){
-		if(goesInFrontOf(data,(*p2head)->data)>=0){
-			(*p2head)->next = malloc(sizeof(Node));
-			(*p2head)->next->data = data;
-			(*p2head)->next->next = NULL;
-		}else{
-			Node *temp = malloc(sizeof(Node));
-			temp->data = data;
-			temp-> next = *p2head;
-			*p2head = temp;
-		}
-	}else{
+
+int insert1(Node **p2head, void *data, ComparisonFunction goesInFrontOf){
+	Node * new_node = malloc(sizeof(Node));
+	new_node->data = data;
+	new_node->next = NULL;
+
+	if(*p2head==NULL||goesInFrontOf((*p2head)->data,new_node->data)>=0)
+	{
+		new_node->next = *p2head;
+		*p2head = new_node;
+		return 1;
+	}
+	else{
 		Node *current = *p2head;
-		while(current->next!=NULL&&goesInFrontOf(current->next,data)<0){
+		while(current->next!=NULL&&goesInFrontOf(current->next->data,new_node->data)<0){
 			current = current->next;
 		}
-		Node *temp = malloc(sizeof(Node));
-		temp->next = current->next;
-		temp->data = value;
-		current->next = temp;
+		new_node->next = current->next;
+		current->next = new_node;
+		return 1;
 	}
+	return 0;
+}
+
+int main()
+{
+	ActionFunction demo1 = &printString;
+	ComparisonFunction demo2 = &compareFirst;
+	CriteriaFunction demo3 = &firstCapital;
+	Node *head = NULL;
+	int i = insert1(&head,"C", demo2);
+	printf("%d\n", i);
+	int n = insert1(&head,"B", demo2);
+	printf("%d\n", n);
+	int s= insert1(&head,"A", demo2);
+	printf("%d\n", s);
+	traverse1(head, demo1);
 }
 
