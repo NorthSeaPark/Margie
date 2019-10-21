@@ -1,0 +1,7 @@
+Diagnostic: We allocate 1 node
+Diagnostic: We allocate 1 node
+Diagnostic: We allocate 1 node
+Diagnostic: 1 node is free
+Diagnostic: 1 node is free
+Bellow are the nodes in order:
+The node: b

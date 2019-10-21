@@ -60,11 +60,16 @@ typedef struct
  	return N;
  }
 
+ void prinfFile(File *diagonostics){
+ 	diagnostics = fopen ("diagnostics.txt", "w+");
+	fprintf(diagnostics, "%s %s %d %s", "We", "allocate", 1, "node");
+	fclose(diagnostics);
+ }
+
 
 int main()
 {
 	/*Now build an array to store these structure*/
-	int sb = sum(5, sos);
-	printf("%d\n", sb);
-	printf("%d\n", sos);
+	File *diagnostics;
+	prinfFile(diagonostics);
 }

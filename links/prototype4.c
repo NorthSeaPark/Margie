@@ -39,17 +39,17 @@ Node* allocateNode(FILE *diagnostics, void *data){
 	Node * new_node = malloc(sizeof(Node));
 	new_node->data = data;
 	new_node->next = NULL;
-	diagnostics = fopen ("diagnostics.txt", "w+");
-	fprintf(diagnostics, "%s %s %d %s", "We", "allocate", 1, "node");
+	diagnostics = fopen ("diagnostics.txt", "a+");
+	fprintf(diagnostics, "Diagnostic: %s %s %d %s\n", "We", "allocate", 1, "node");
 	fclose(diagnostics);
 	return new_node;
 }
 
 /*Free Node fuction*/
-void freeNode(Node *temp){
+void freeNode(Node *temp, FILE *diagnostics){
 	free(temp);
-	diagnostics = fopen ("diagnostics.txt", "w+");
-	fprintf(diagnostics, "%d %s %s %s", 1, "node", "is", "free");
+	diagnostics = fopen ("diagnostics.txt", "a+");
+	fprintf(diagnostics, "Diagnostic: %d %s %s %s\n", 1, "node", "is", "free");
 	fclose(diagnostics);
 }
 
@@ -58,18 +58,22 @@ void freeNode(Node *temp){
 /*Need implement with diagnostic*/
 void traverse(Node *head, ActionFunction doThis, FILE *diagnostics){
 	Node *temp = head;
-	diagnostics = fopen ("diagnostics.txt", "w+");
+	diagnostics = fopen ("diagnostics.txt", "a+");
+	fprintf(diagnostics, "Bellow are the nodes in order:\n");
+	fclose(diagnostics);
 	while(temp!=NULL){
 		doThis(temp->data);
+		diagnostics = fopen ("diagnostics.txt", "a+");
+		fprintf(diagnostics, "The node: %s\n",(char*)(temp->data));
+		fclose(diagnostics);
 		temp=temp->next;
-		fprintf(diagnostics, "The inserted node is %s\n",(char*)temp->data);
 	}
 }
 
 /*Insert Function*/
 
 int insert(Node **p2head, void *data, ComparisonFunction goesInFrontOf, FILE *diagnostics){
-	Node * new_node = allocate(diagnostics, data);
+	Node * new_node = allocateNode(diagnostics, data);
 
 	if(*p2head==NULL||goesInFrontOf((*p2head)->data,new_node->data)>=0)
 	{
@@ -96,7 +100,7 @@ void deleteSome(Node **p2head, CriteriaFunction mustGo, ActionFunction disposal,
 	while(temp != NULL && mustGo(temp->data)==1){
 		disposal(temp->data);
 		*p2head = temp->next;
-		freeNode(temp);
+		freeNode(temp,diagnostics);
 		temp = *p2head;
 	}
 
@@ -110,7 +114,7 @@ void deleteSome(Node **p2head, CriteriaFunction mustGo, ActionFunction disposal,
 
 		disposal(temp->data);
 		prev->next = temp->next;
-		freeNode(temp);
+		freeNode(temp,diagnostics);
 		temp = prev->next;
 	}
 }
@@ -120,13 +124,14 @@ int main()
 	ActionFunction demo1 = &printString;
 	ComparisonFunction demo2 = &compareFirst;
 	CriteriaFunction demo3 = &firstCapital;
+	FILE *diagnostics;
 	Node *head = NULL;
-	insert(&head,"C", demo2);
-	insert(&head,"b", demo2);
-	insert(&head,"A", demo2);
-	deleteSome(&head, demo3, demo1);
-	printf("Above is/are the deleted nodes\n");
-	printf("Bellow is/are the nodes left\n");
-	traverse(head, demo1);
+	insert(&head,"C", demo2, diagnostics);
+	insert(&head,"b", demo2, diagnostics);
+	insert(&head,"A", demo2, diagnostics);
+	deleteSome(&head, demo3, demo1, diagnostics);
+	printf("Above are the deleted nodes\n");
+	printf("Bellow are the nodes left\n");
+	traverse(head, demo1, diagnostics);
 }
 
