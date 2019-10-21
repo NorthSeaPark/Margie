@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define N 10
+int sos = 1;
 
 typedef struct 
 {
@@ -54,12 +55,16 @@ typedef struct
  }
 
  /*We also need a write function*/
+ int sum(int i, int sos){
+ 	sos = sos + i;
+ 	return N;
+ }
 
 
 int main()
 {
 	/*Now build an array to store these structure*/
-	Words *book;
-	book = (Words*)malloc(sizeof(Words)*N);
-	insert_words(book);
+	int sb = sum(5, sos);
+	printf("%d\n", sb);
+	printf("%d\n", sos);
 }

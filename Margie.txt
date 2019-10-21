@@ -48,4 +48,13 @@ This how we compare the first n characters of the string in c
 char str1[] = "asshole";
 char str2[] = "bitch";
 printf("%d\n", strncmp(str1, str2, 1));
+-----------------------------------------------------------------------------------------
+fprintf is used to write set of characters into the file
+int main () {
+	FILE * fp;
+	fp = fopen ("file.txt", "w+");
+	fprintf(fp, "%s %s %s %d", "We", "are", "in", 2012);
+	fclose(fp);
+	return(0);
+}
 
