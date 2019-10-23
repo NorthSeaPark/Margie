@@ -1,0 +1,11 @@
+Swap linked list for the array of asteroids 
+
+linklists contain pointer to node and pointer to data
+
+Universe structure:
+Hold two linklists:(1) asteroids currently in the simulation (2) newly created asteroids that needed to beb added to the belt
+What structure has: data & node 
+data is void pointer which can point to the structure of asteroids
+
+All linked list functions will be in linkedlist.c
+

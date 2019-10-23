@@ -6,7 +6,7 @@
 int main()
 {
 	FILE * fp;
-	fp = fopen ("file.txt", "a+");
+	fp = fopen ("file.txt", "w+");
 	if(fp == NULL){
 		puts("I'm wasting my life on these shits");
 	}else{
