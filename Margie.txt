@@ -57,6 +57,14 @@ int main () {
 	fclose(fp);
 	return(0);
 }
+fscanf is used to read from file
+int main(){
+	File * fp;
+	fp = fopen("file.txt","r+");
+	fscanf(fp,"%s",str1);
+	fclose(fp);
+	return(0);
+}
 -------------------------------------------------------------------------------------------
 p1: p1.o libasteroids.h
 	gcc -o p1 p1.o -L. -lasteroids -lncurses

@@ -1,0 +1,8 @@
+Openning Diagnostic file for output
+Diagnostic: Openning infile for intput
+Diagnostic: Openning outfile for output
+Diagnostic: Openning diagnostics for output
+Writing finished
+Diagnostic: Closing infile
+Diagnostic: Closing outfile
+Diagnostic: Closing Diagnostic

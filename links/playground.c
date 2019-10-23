@@ -50,8 +50,18 @@ int main(int argc, char *argv[])
 	}
 	fprintf(diagnostics_fp, "Openning infile for intput");
 	fprintf(diagnostics_fp, "Openning outfile for output");
+	fprintf(diagnostics_fp, "Openning diagnostics for output");
 
 	/*Read and write files*/
-
-
+	int i1, i2, i3, i4, i5, i6;
+	while(6 == fscanf(infile_fp, "%d %d %d %d %d %d", &i1, &i2, &i3, &i4, &i5, &i6)){
+		fprintf(outfile_fp, "%d %d %d %d %d %d", i1, i2, i3, i4, i5, i6);
+	}
+	fprintf(diagnostics_fp, "Writing finished");
+	fprintf(diagnostics_fp, "Diagnostic: Closing infile");
+	fprintf(diagnostics_fp, "Diagnostic: Closing outfile");
+	fprintf(diagnostics_fp, "Diagnostic: Closing Diagnostic");
+	fclose(infile_fp);
+	fclose(outfile_fp);
+	fclose(diagnostics_fp);
 }
