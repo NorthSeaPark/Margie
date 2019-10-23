@@ -3,15 +3,49 @@
 #include "linkedlist.h"
 #include <string.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-	FILE * fp;
-	fp = fopen ("file.txt", "w+");
-	if(fp == NULL){
-		puts("I'm wasting my life on these shits");
-	}else{
-		fprintf(fp, "You know I cherish u my love\n");
-		fclose(fp);
+	/*Check the arguments*/
+	if(argc != 3){
+		printf("Please enter three arguments\n");
+		return 0;
 	}
-	return(0);
+
+	FILE * infile_fp;
+	FILE * outfile_fp;
+	FILE * diagnostics_fp;
+
+	char *append = ".txt";
+	strcat(argv[0],append);
+	strcat(argv[1],append);
+	strcat(argv[2],append);
+	/*Open files*/
+	diagnostics_fp = fopen(argv[2], "w+");
+	if(diagnostics_fp == NULL){
+		printf("diagnostics file can't open\n");
+		fclose(diagnostics_fp);
+		return 0;
+	}else{
+		fprintf(diagnostics_fp, "Openning Diagnostic file for output");
+		infile_fp = fopen(argv[0], "w+");
+		outfile_fp = fopen(argv[1], "w+");
+		if(infile_fp == NULL){
+			fprintf(diagnostics_fp, "Diagnostic: fail to open infile for input");
+			fprintf(diagnostics_fp, "Diagnostic: Closing infile");
+			fprintf(diagnostics_fp, "Diagnostic: Closing Diagnostic");
+			fclose(infile_fp);
+			fclose(diagnostics_fp);
+			return 0;
+		}
+		if(outfile_fp == NULL){
+			fprintf(diagnostics_fp, "Diagnostic: fail to open outfile for output");
+			fprintf(diagnostics_fp, "Diagnostic: Closing outfile");
+			fprintf(diagnostics_fp, "Diagnostic: Closing Diagnostic");
+			fclose(outfile_fp);
+			fclose(diagnostics_fp);
+			return 0;
+		}
+	}
+
+
 }

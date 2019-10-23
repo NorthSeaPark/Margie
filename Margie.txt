@@ -65,4 +65,10 @@ p1.o: p1.c libasteroids.h
 
 lab3.zip: Makefile lab3.c p1.c p2.c p3.c p4.c README_LAB3 libasteroids.h libasteroids.a
 	zip lab3.zip Makefile lab3.c p1.c p2.c p3.c p4.c README_LAB3 libasteroids.h libasteroids.a
+--------------------------------------------------------------------------------------------
+Command-line arguments are given after the name of the program in command-line shell of Operating Systems. To pass command line arguments, we typically define main() with two arguments : first argument is the number of command line arguments and second is list of command-line arguments.
+
+int main(int argc, char *argv[]) { /* ... */ }
+
+
 
