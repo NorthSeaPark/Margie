@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	/*Open files*/
 	diagnostics_fp = fopen(argv[2], "w+");
 	if(diagnostics_fp == NULL){
-		printf("diagnostics file can't open\n");
+		printf("diagnostics file can't open - Exiting\n");
 		fclose(diagnostics_fp);
 		return 0;
 	}else{
@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
 			fprintf(diagnostics_fp, "Diagnostic: fail to open infile for input");
 			fprintf(diagnostics_fp, "Diagnostic: Closing infile");
 			fprintf(diagnostics_fp, "Diagnostic: Closing Diagnostic");
+			fprintf(diagnostics_fp, "Diagnostic: Exiting - could not open all files");
 			fclose(infile_fp);
 			fclose(diagnostics_fp);
 			return 0;
@@ -41,11 +42,16 @@ int main(int argc, char *argv[])
 			fprintf(diagnostics_fp, "Diagnostic: fail to open outfile for output");
 			fprintf(diagnostics_fp, "Diagnostic: Closing outfile");
 			fprintf(diagnostics_fp, "Diagnostic: Closing Diagnostic");
+			fprintf(diagnostics_fp, "Diagnostic: Exiting - could not open all files");
 			fclose(outfile_fp);
 			fclose(diagnostics_fp);
 			return 0;
 		}
 	}
+	fprintf(diagnostics_fp, "Openning infile for intput");
+	fprintf(diagnostics_fp, "Openning outfile for output");
+
+	/*Read and write files*/
 
 
 }
