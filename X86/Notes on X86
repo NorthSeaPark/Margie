@@ -141,6 +141,7 @@ long sum(long count, long *array){
 }
 
 =>Now let's go with assembly language
+
 .file "sumprog.s"
 #allocate storage for static array
 .section
@@ -154,5 +155,43 @@ array:
 	.quad 12
 	.quad 15
 	.quad 19
+.globl main
+	.type main, @function
 
+#main
+.text
+main:
+	pushq %rbp
+	movq %rsp, %rbp
+	movq $array, %rsi
+	movq $4, %rdi
+
+	call sum
+
+	movq %rax, %rsi
+	movq $printf_line, %rdi
+
+	movq $0, %rax
+	call printf
+	leave
+	ret
+.size main, .-main
+
+#sum
+.globl sum
+	.type sum, @function
+
+sum:
+	pushq	%rbp
+	movq %rsp, %rbp
+	movq $0, %rax
+loop:
+	decq %rdi
+	jl exit
+	addq (%rsi,%rdi,8), %rax
+jmp		loop
+exit:
+	leave
+	ret
+.size sum, .-sum
 
