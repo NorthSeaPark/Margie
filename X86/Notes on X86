@@ -69,3 +69,90 @@ salq $4, %rdx  #t4
 leaq 4(%rdi, %rdx), %rcx #t5
 imulq %rcx, %rax #rval 
 ret
+
+t1 = x+y
+t2 = x+y+z
+z = 3y
+t4 = 48y
+t5 = 4+x+48y
+return value = (x+y+z)*(4+x+48y)
+--------------------------------------------------------------------
+Frame
+Each precedure or function has its own part of the stack to use, which is called its frame.
+-Stack top address always held in register %rsp
+-Stack grows toward lower addresses
+--------------------------------------------------------------------
+Setting up the program stack:
+At the start of the function: 
+Set %rbp to point to the bottom of the current stack frame.
+Set %rsp to point the top of the stack.
+Put them back
+Part 1:
+pushq %rbp		#Save caller's base pointer
+movq %rsp,%rbp  #Set the base pointer
+#The stack now is empty
+Part 2:
+leave
+---------------------------------------------------------------------
+Call instruction:
+call Dest
+When the call instruction is excuted, the address of the instruction after the
+call instruction is pushed on to the stack and assigned to PC(%rip).
+PC + 9 = return value to push 
+---------------------------------------------------------------------
+-Caller Saved Registers:
+Registers that the "Caller" function pushes to the stack prior to calling the "Callee" function
+-Callee Saved Registers:
+must push to the stack of the "Callee" function wishes to use the register
+-The first 6 parameters are passed from caller to the callee: %rdi, %rsi, %rdx, %rcx, %r8, %r9
+-If the callee returns a value to the caller, it is returned in register %rax
+---------------------------------------------------------------------
+%rax: return value 		%r8: 5th parameter
+%rbx: callee Saved 		%r9: 6th parameter
+%rcx: 4th parameter 	%r10 & %r11: Caller Saved
+%rdx: 3rd parameter 	%r12 to %r15: Callee Saved
+%rsi: 2nd parameter
+%rdi: 1st parameter
+%rsp: Stack Pointer
+%rbp: Callee Saved
+----------------------------------------------------------------------
+%rax is used for return value
+%rsp must be restored when control is returned to the caller function
+callee value must save/then restore their origin values before returning control to the caller\
+----------------------------------------------------------------------
+Example with C and assembly codes:
+main:
+long sum(long count, long *array);
+int main(){
+	static long array[4] = {10,12,15,19};
+	long count = 4;
+	long result;
+	result = sum(count, array);
+	printf("The sum of the array is %i\n", result);
+}
+sum():
+long sum(long count, long *array){
+	long result = 0;
+	long i;
+	for(i=0; i<count; i++){
+		result = result + array[i];
+	}
+	return result;
+}
+
+=>Now let's go with assembly language
+.file "sumprog.s"
+#allocate storage for static array
+.section
+.rodata
+printf_line:
+.string "The sum of the array is %i\n"
+.data
+.align 8 #insure that we are starting on an 8-byte boundary
+array:
+	.quad 10
+	.quad 12
+	.quad 15
+	.quad 19
+
+
