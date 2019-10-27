@@ -1,0 +1,71 @@
+Assembler directives:
+
+.file:
+Allows a name to be assigned to the assembly language source.
+.section:
+This makes the specified section the current section.
+.string
+Specifies that the characters enclosed in quotation marks
+.data
+Change current section to data section
+.text
+Change current section to text section
+.globl
+.type
+.size
+----------------------------------------------------------------
+.quad: 8 bytes
+.long: 4 bytes
+.word: 2 bytes
+.byte: 1 byte
+----------------------------------------------------------------
+Immediate values are preceded by $
+Registers are prefixed with %
+Move and ALU: source, destination: movq $5, %rax
+Effective address: movq $5, 8(%rbx)
+----------------------------------------------------------------
+C codes:
+long t0 = *xp;
+long t1 = *yp;
+*xp = t1;
+*yp = t0;
+
+assembly codes:
+movq (%rdi), %rax
+movq (%rsi), %rdx
+movq %rdx, (%rsi)
+movq %rax, (%rdi)
+
+-----------------------------------------------------------------
+suffix is important
+movq 24(%rax,%rcx,4), %rdx --- read 8 bytes from this address: (24+%rax+4*%rcx)
+movl ... read 4 bytes
+movw ... read 2 bytes
+movb ... read 1 byte
+-----------------------------------------------------------------
+mov: copies the data item referred to the source to the destination
+lea: put a memory address into the destination
+
+leaq (%rdi,%rdi,2), %rax : t <- x+x*2 which also means x*3
+-----------------------------------------------------------------
+Some Arithmetic Operations:
+sal: Arithmetic shift to left
+sar: ---        shift to right
+shr:            logical shift to right
+-----------------------------------------------------------------
+Arithmetic Expression:
+(z+x+y)*((x+4)+(y*48))
+%rdi: x
+%rsi: y
+%rdx: z
+%rax: t1, t2, rval
+%rdx: t4
+%rcx: t5
+
+leaq (%rdi,&rsi), %rax #t1
+addq %rdx, %rax	 #t2
+leaq (%rsi, %rsi, 2), %rdx
+salq $4, %rdx  #t4
+leaq 4(%rdi, %rdx), %rcx #t5
+imulq %rcx, %rax #rval 
+ret
