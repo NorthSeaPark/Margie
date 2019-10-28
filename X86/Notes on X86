@@ -172,7 +172,7 @@ main:
 	movq $printf_line, %rdi
 
 	movq $0, %rax
-	call printf
+	call 
 	leave
 	ret
 .size main, .-main
@@ -194,4 +194,55 @@ exit:
 	leave
 	ret
 .size sum, .-sum
+------------------------------------------------------------------------
+Conditional codes
+CF: carry flag --- if carry out from most significant bit
+SF: Sign Flag --- if t==0
+ZF: Zero flag --- t<0 as signed
+OF: Overflow Flag --- if two's complement overflow
+
+sete	Equal
+setne	Not Equal
+sets	Negative
+setns
+setg 	Greater
+setge 	Greater or Equal
+setl 	Less
+setle 
+seta 	Above
+setb 	Bellow
+------------------------------------------------------------------------
+Example:
+int gt (long x, long y)
+{
+	return x > y;
+}
+
+cmpq %rsi, %rdi		#Compare x:y
+setg %al     		#Set when >
+movezb %al, %rax 	#Zero rest of %rax
+ret 
+-------------------------------------------------------------------------
+Jumping instuction: jump to diffrent part of code depending on condition codes
+jmp 	conditional
+then change set to j
+-------------------------------------------------------------------------
+cmov instruction: Move a value depending on condition codes
+change set to cmov
+--------------------------------------------------------------------------
+Example as well as the homework
+.file "scanPrint.s"
+.section 	.rodata
+...
+---------------------------------------------------------------------------
+Basic Data Movement
+- pushq %rax - substract 8 bytes from the value in %rsp and then copy the value in %rax onto the stack
+at the address pointed to by %rsp
+- leave Sets stack pointer to the base frame address. Pops what is at top of stack in to %rbp
+  and adds 8 bytes to %rsp
+- This prepares the stach for return
+leave = movq %rbp, %rsp
+		popq %rbp
+
+
 
