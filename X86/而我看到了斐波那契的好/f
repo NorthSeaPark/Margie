@@ -1,0 +1,29 @@
+f:
+	pushq %rbp
+	movq %rsp, %rbp
+
+	movq %rdi, %rax
+	cmpq $2, %rdi #if rdi is less than 2
+	jl done
+	pushq %r12 #callee register
+	pushq %r13
+
+	decq %rdi
+	movq %rdi, %r12
+
+	call f
+	movq %rax, %r13
+
+	movq %12, %rdi
+	decq %rdi
+
+	call f
+	addq %r13, %rax # %r13 stores f(n-1) and %rax stores f(n-2)
+
+	popq %r13
+	popq %r12
+
+done:
+	leaveq
+	ret
+

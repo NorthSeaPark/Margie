@@ -41,7 +41,7 @@ int main()
 
 	ComparisonFunction demo2 = &compareFirst;
 	int i = demo2("Charlie", "Bob");
-	printf("%d\n", i);
+	printf("%d\n", i); 
 
 	
 	CriteriaFunction demo3 = &firstCapital;
