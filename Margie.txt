@@ -83,4 +83,23 @@ int main(int argc, char *argv[]) { /* ... */ }
 command for C++ on windows:
 g++ card_prob.cpp -o card
 
+关于那一个绝望又傻逼的演讲：
+
+一些会提到的主题：
+Arab Spring, Social Network, 社交网络对于人们的影响, consequencailism, Law of Nature
+(1)讲述一下Arab Spring的背景
+(2)介绍一下Whael的两篇演讲的不同
+(3)引出我的问题：政府是否应该控制人们在网上的言论。
+(4)现在引出正方还有反方
+正方：言论自由的哲学本质，以及言论自由给社会带来的好处。
+反方：law of nature, 5 rules on internet，暴徒算法
+(5)政府对于言论的控制
+举例：香港事件
+1.中国政府
+2.西方媒体
+(6)我的观点：应该控制
+从而引出对于 一个社交网络 设计的思考
+(7)总结
+
+
 
