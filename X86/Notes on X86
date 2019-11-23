@@ -243,6 +243,13 @@ at the address pointed to by %rsp
 - This prepares the stach for return
 leave = movq %rbp, %rsp
 		popq %rbp
+---------------------------------------------------------------------------
+*dest = t;
+转化成x86
+mov %rax, (%rbx)
+pop %rbx
+我们将数值存在了%rbx的地址上
+然后返回了%rbx这个callee register
 
 
 
