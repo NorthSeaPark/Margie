@@ -109,6 +109,40 @@ Arab Spring, Social Network, 社交网络对于人们的影响, consequencailism
 actants: 行动元
 萨特：存在投射
 海德格尔：共享世界
+------------------------------------------------------------------------------------------------------------
+CSE 5522
+Office Hour: 
+Wed: 3PM
+Thurs: 1PM
+Final:
+4-6PM
+
+HW2 Question 8 solved
+
+Understand the KL formula
+
+对了，我们再说说操蛋的Decision Tree
+最重要的是entrophy
+
+I(P(V1)to P(Vn)) = 1 to n SUM (-P(vi)log2P(vi))
+Gain(T,X) = Entropy(T) - Entropy(T,X)
+
+If the sample is completely homogeneous the entropy is zero
+and if the sample is equally divided then it has entropy of one.
+
+Information gain: The information gain is based on the derease in 
+entropy after a data-set is split on an attribute. Decision tree need
+to find the highest information gain
+
+Step one: Calculate the entropy of the target
+
+Step two:The resulting entropy is substracted from the entropy before the split
+
+Choose the attribute with the largest information gain as decision node.
+Divide the branch and repeat the same process.
+
+
+
 
 
 
