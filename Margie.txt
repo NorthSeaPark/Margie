@@ -155,11 +155,135 @@ C expression	type 		Assembly code
 	E[i] 		int 		movel(%rdx,%rcx,4), %eax
 	&(E[i]) 	int*	    leaq(%rdx,%rcx,4), %rax
 	E+i-1		int*		leaq -4(%rdx,%rcx,4), %rax
-	*(E+i-3) 	int 		movl -12(%rdx,%rcx,4), %eax 		
+	*(E+i-3) 	int 		movl -12(%rdx,%rcx,4), %eax 	
 
 
+Loop array for assembly codes
 
+int size;
+for(int i =0; i<size; i++){
+	z[i]++;
+}	
 
+assembly: %rdi holds the address of z
+-------------------------
+moveq $0, %rax
+jmp .L3
+.L4:
+  addl $1,(%rdi,%rax,4)
+  addq $1,%rax
+.L3:
+  cmpq $4, %rax
+  jle .L4
+  ret
+--------------------------
+Allocate array
+int data[20]
+push %rbp
+movq %rsp,%rbp
+subq $80, %rsp
+leaq (%rsp), %raxf
+---------------------------
+上一个春天
+
+在上一个春天，
+你还在我身边，
+就站在车站前，
+你我放弃了语言。
+
+欺骗，
+是最美的诗篇，
+它延长了时间，
+然后发现，
+不是什么都只剩下一点。
+
+在五月的某一天，
+那片湖面又出现在公路前，
+我背包里装的是，
+接下来的夏天，
+和被你长发拥抱的誓言。
+
+只有放弃，
+才能让我的胳膊深得更远，
+在搂住地球的那一瞬间，
+你就站在地铁口对面，
+与我相隔三个月。
+
+你被夏天宠爱的有些热烈，
+不在意双脚离地面越来越远。
+而我一头扎进湖底，
+下面是上一个春天。
+---------------------------------
+pushq %rbp
+movq %rsp, %rbp
+subq $520, %rsp
+pushq %rbx
+leaq 8(%rsp), %rbx
+movl $0x0, (%rbx)
+---------------------------------
+initialize:
+pushq %rbp
+movq %rsp, %rbp
+subq $520, %rsp
+pushq %rbx
+leaq 8(%rsp), %rbx = leaq -520(%rbp), %rbx
+movq $0, %rcx
+init:
+comq $130, %rcx
+je next
+movl $0, (%rbx,%rcx,4)
+incq %rcx
+jmp init
+next:
+---------------------------------
+Return:
+popq %rbx
+movq %rbp, %rsp
+popq %rbp
+ret
+// WE pop out callee regiester in reverse order
+--------------------------------------------------
+你那写的像屎一样的代码，三千年后就变成了古巴比伦的语言，放在博物馆里边。
+--------------------------------------------------
+if the elements are larger than 8 bytes
+imulq $20, %rcx, %rax
+--------------------------------------------------
+Nested Array Row Access
+A[i] is array of C elements
+starting address = A + i*C*K
+--------------------------------------------------
+Array access
+pgh:
+1 2 3 4 5
+1 2 3 4 5
+1 2 3 4 5
+1 2 3 4 5
+
+return pgh[index]
+%rdi = index
+leaq (%rdi,%rdi,4), %rax //5*index
+leaq pgh(,%rax,4), %rax // phg + 20*index
+--------------------------------------------------
+Element access
+A[i][j]
+Address: A + i*c*k + j*k = A+k*(i*c+j)
+leaq (%rdi,%rdi,4), %rax
+addq %rsi, %rax
+mov1 pgh(,%rax,4), %eax
+---------------------------------------------------
+Multi-level array
+sb1 = {1,2,3}
+sb2 = {4,5,6}
+sb3 = {7,8,9}
+
+int *sbs = {sb2,sb1,sb3}
+return sbs[index][digit]
+
+%rdi->index %rsi->digit
+salq $2, %rsi
+addq (,%rdi,8),%rsi
+movl (%rsi), %eax
+----------------------------------------------------
 
 
 
