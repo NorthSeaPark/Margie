@@ -141,6 +141,25 @@ Step two:The resulting entropy is substracted from the entropy before the split
 Choose the attribute with the largest information gain as decision node.
 Divide the branch and repeat the same process.
 
+那么回到C语言吧
+
+if p is a pointer a data type T
+the value of p is x_p (address)
+then p+i has value x_p + L*i
+L is the size of data type T
+Thus, A[i] == *(A+i)
+Let rdx holds starting address of array E
+    rcx holds integer index i
+C expression	type 		Assembly code
+	E  			int*		moveq %rdx, %rax
+	E[i] 		int 		movel(%rdx,%rcx,4), %eax
+	&(E[i]) 	int*	    leaq(%rdx,%rcx,4), %rax
+	E+i-1		int*		leaq -4(%rdx,%rcx,4), %rax
+	*(E+i-3) 	int 		movl -12(%rdx,%rcx,4), %eax 		
+
+
+
+
 
 
 
