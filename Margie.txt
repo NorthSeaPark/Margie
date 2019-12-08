@@ -346,7 +346,104 @@ short get_j(int idx)
 
 a+12*idx+8
 movq (%rdx,%rdx,$2), %rax
-movswl a+8(,%rax,$12), %eax
+movswl a+8(,%rax,$4), %eax
+-------------------------------------
+Saving Space:
+Put large data type first
+------------------------------------
+关于*A **A ***A
+代表指向的那一个元素
+对于一个array A来说 *A就是第一个元素
+----------------------------------------
+Linking and Relocation
+
+Linking: The process of collecting and combining various pieces of code and data in to a single file that can be loaded into memory and executed
+
+Relocation: The process of adjusting addresses in object modules when the modules are linked with other modules
+
+OS concepts:
+Read only space: 
+-read only data such as printf or scanf
+-Code
+Read-write space: data both read and write
+
+Why Linkers?
+Reason 1: Modularity
+Written as a collection of smaller source files
+Reason 2: Efficeincy
+Time seperate compilation
+
+What do Linkers do?
+1: Symbol resolution: During symbol resolution step, the linker associates refrence with exactly one symbol definition
+2: Relocation
+Merge...single file
+Relocate relative locations to final absolute memory
+Updates all references
+
+Three types:
+Relocatable object file  Executable file Shared object file
+
+ELF Object File Format
+ELF header
+Segment header table
+.text section
+.rodata section
+.data section
+.bss section
+.symtab section
+.rel .txt section
+.res .data section
+.debug section
+Section header table
+
+local non-static C variables: stored on the stack
+local static C variables: stored in either .bss or .data
+
+Duplicate Symbol definition:
+Strong: procedured and initialized global
+Weak: unintialized
+
+*important linker's symbol rules
+1. Multiple strong symbols are not allowed 
+2. Given weak and strong, choose strong
+References to the weak symbol resolve to the strong symbols
+3. Given weak, arbituary choose
+
+Examples:
+int x;
+p1{}      p1{}
+//Two strong symbols
+
+int x 		int x
+p1			p2
+//Two identical weak symbols
+
+int x;		double x
+int y;
+//x in second program may override y
+
+int x=7  	double x
+int y=5
+//x in second program will override y
+
+use static 	initialize if you defina a globel variable  use extern
+
+Packaging Commonly:
+Option 1: Put all functions in a single source file
+Link big object file into their programmers
+
+Option 2: each functio in seperate source file
+
+Shared Library and Dynamic linking
+
+Linking: technique that allows programms to be constructed from
+multiple object files
+
+Linking can happan at different times:
+Compile, Load, Run
+
+
+
 
 
 
