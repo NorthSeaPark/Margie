@@ -284,7 +284,69 @@ salq $2, %rsi
 addq (,%rdi,8),%rsi
 movl (%rsi), %eax
 ----------------------------------------------------
+Linked list and assembly codes
+struct rec{
+	int a[4];
+	int i;
+	struct rec *next;
+}
+|a________________|i_____|next____|
 
+0 				  16     24      32
+
+void set_val(struct rec *r, int val)
+{
+	while(r){
+		int i= r->i;
+		r->a[i] = val;
+		r = r->next;
+	}
+}
+
+#movslq: sign extend 32bit to 64bit
+
+.L1:
+movslq 16(%rdi), %rax
+movl %esi, (%rdi,%rax,4)
+movq 24(%rdi), %rdi
+testq %rdi, %rdi
+jne .L1
+
+#test reg,reg = cmp reg,$0
+-----------------------------------
+Aligned Data
+Address must be multiple of K bytes
+
+struct S1{
+	char c;
+	int i[2];
+	double v;
+} *p;
+
+In this case, K = 8
+due to the type of double
+------------------------------------
+1 byte: char
+2 bytes: short
+4 bytes: int,float
+8 bytes: double, long, char*
+
+struct S3{
+	short i;
+	float v;
+	short j;
+}a[10]
+
+i (2 bytes) v j (2 bytes) = 12 bytes for 1 unit
+
+short get_j(int idx)
+{
+	return a[idx].j
+}
+
+a+12*idx+8
+movq (%rdx,%rdx,$2), %rax
+movswl a+8(,%rax,$12), %eax
 
 
 
