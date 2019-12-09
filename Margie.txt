@@ -610,6 +610,40 @@ Floating Point
 Performance
 All Homework
 ---------------------------------------------------------
+IEEE floating point
+V = x * 2^y
+
+The real number decimal value represented is: (-1)^s * f * 2^e
+|S|   E   |   F   |
+S: 0 positive 1 negative
+E: E = e + bias
+F: is an unsigned integer
+For 32 bit, n = 23 and bias = 127
+For 63 bit, n = 52 and bias = 1023
+
+Example:
+put 64.2 to IEEE
+S = 0
+64.2 = 1.xxx * 2^6
+e = 6
+E = 6+127 = 133
+Then, transfer 133 to 8 bits binary
+--------------------------------------------------------
+Performance
+Compelling into Assembly
+
+gcc -Og -S sum.c -> sum.s
+
+Disassembler: objdump -d sum
+
+Example:
+*dest = t; 		movq %rax, (%rbx) 	48 89 03
+
+48: is a prefix denoting 64 bit
+89: means MOV
+03: encodes two registers: 000(RAX) and 011(RBX) -> 000011 hex03
+
+
 
 
 
