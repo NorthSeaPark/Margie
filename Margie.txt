@@ -517,7 +517,9 @@ Parameters passed to a function have what storage class? automatic
 Block scope variables default to what storage class?
 automatic
 
-NEED ADD MORE
+Storage class: static, automatic, register, external
+Storage Scope: block, file, prototype, function
+Storage Linkage: internal, external, none
 ----------------------------------------------------
 Cache exploits 2 types of locality:
 Temporal & spatial
@@ -536,6 +538,83 @@ Need to look at the slides storage and system
 Need to go through all of the homework
 In Morning
 _______________________________________________________
+System:
+hardware + softerware to achieve the goal if runnung application programs
+Hardware: Data storage, Data movement, Data transformation
+
+Data storage:
+Combinational: do not store state. current input->current output
+Sequential: store state. Have memory
+
+Data movement:
+System memory bus: address bus + data bus + control lines
+Memory Address Register + Memory Data Register
+
+CPU: eight byte read
+Read: (1)Set readline to 1 (2)Get the address off of the address bus (3) Put the address on data bus
+Write: (1)Set writeline to 1 ...
+
+Data transformation: state elements + combinational circuits
+
+Architecture
+ISA: Processor State + Format of Instructions
+Registers: PC - Holds the address of the current instruction IR - the bits of the instruction are stored in order for the instruction 
+to be excuted 
+
+CPU = Register File + ALU + Control(instruction fetching and execution) + EFLAGS register
+
+Electrical conduit used to carry bytes of information between hardware components
+
+SRAM: transistors bit 6 	DRAM: transistor bit 1
+CPU Cache                   Main memory
+
+Cache: is the concept of having smaller faster devices
+Caching works because computer software exhibits the property of locality in memory access.
+
+Spatial locality: nearby locations
+Temporal locality: same piece of data
+
+Amdahl's law: Basically says that when we speed up one part of the system, the overall effect on system performane depends upon
+how significant the part sped up was to the overall system and how big the speed improvement was.
+
+PCB: blocked state to previous state
+________________________________________________________
+Integers: Carry in, Carry out
+Unsigned: non negative
+sign extended: For unsigned fill to left with zero
+			   For signed repeat sign bit
+2's complement: invert + 1
+
+Rounding: round down, round up, toward away zero, nearest
+
+Big-Endian storage of hex 00000226 Most significant byte stored at the first address
+address 	Byte
+1000        00
+1001        00
+1002        02
+1003        26
+
+Little-Endian storage: the least significant byte is stored at the first addresses
+0x8000 - 0x8 = 7FFF8
+---------------------------------------------------------
+Multiplication Hardware
+Left Shift:
+x*7 = x<<2 + x<<1 + x<<0
+
+y = -6 x = 5
+x*y
+(x<<1) - (x<<3)
+---------------------------------------------------------
+After noom
+Floating Point
+Performance
+All Homework
+---------------------------------------------------------
+
+
+
+
+
 
 
 
