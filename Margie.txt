@@ -642,6 +642,16 @@ Example:
 48: is a prefix denoting 64 bit
 89: means MOV
 03: encodes two registers: 000(RAX) and 011(RBX) -> 000011 hex03
+---------------------------------------------------------
+This is what you get Margie,
+When you messed with me.
+Yes, I love you.
+But I can't reject your deny.
+You just let me down.
+Damn,
+It's over.
+It's over.
+Margie.
 
 
 
